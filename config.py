@@ -62,7 +62,7 @@ class firstWindow(QWidget):
         self.nextBtn.setGeometry(200, 450, 400, 40)
         self.nextBtn.setText("Next")
         self.nextBtn.clicked.connect(self.next)
-        self.nextBtn.setObjectName("directedBtn")
+        self.nextBtn.setObjectName("nextBtn")
 
 
 app = QApplication(sys.argv)

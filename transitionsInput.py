@@ -49,7 +49,10 @@ class transitionInputWindow(QWidget):
                 ts[colHeader][rowHeader]=[]
                 item = self.table.item(i, j)
                 if item is not None:
-                    ts[colHeader][rowHeader].append(item.text())
+                    if ',' in item.text():
+                        ts[colHeader][rowHeader] = (item.text().split(','))
+                    else:
+                        ts[colHeader][rowHeader].append(item.text())
 
         print(ts)
         return ts
@@ -58,6 +61,9 @@ class transitionInputWindow(QWidget):
     def inputToFA(self):
         self.nfa = FA(self.NFAstates,self.alphabets,self.startState,self.acceptingStates,self.get_input_fields_convert_to_nfa())
         print(self.nfa.transitions)
+        self.dfa = self.nfa.convert2DFA()
+        print(self.dfa.transitions)
+        
 
     def initUI(self):
         
@@ -89,6 +95,9 @@ class transitionInputWindow(QWidget):
         self.label = QtWidgets.QLabel(self)
         self.label.setGeometry(1200, 100, 400, 50)
         self.label.setText("Enter the transition in the table")
+        self.label = QtWidgets.QLabel(self)
+        self.label.setGeometry(1200, 150, 400, 50)
+        self.label.setText("To enter multiple destination states (separate by ',')")
 
 
         self.convert = QtWidgets.QPushButton(self)
