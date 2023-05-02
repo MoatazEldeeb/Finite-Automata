@@ -39,8 +39,9 @@ class FA():
 
             for a, toStates in ts[states[i- len(states)]].items():
                     temp = '-'.join(toStates)
-                    newTransitions =  getTransitionsOf(temp,self.transitions)
-                    if not(temp in states) and not (newTransitions in list(ts.values())):
+                    
+                    if not(temp in states) :
+                        newTransitions =  getTransitionsOf(temp,self.transitions)
                         states.append(temp)
                         ts[temp] = newTransitions
                         i+=1
@@ -81,23 +82,3 @@ def getTransitionsOf(s,transitions):
                 else:
                     l[i] = j
     return l
-
-# states = ['A','B','C']
-# alphabet = ['a','b']
-# startState = 'A'
-# acceptingStates = ['C']
-# transitions = {
-#     'A':[('A','a'),('C','b'),('B','a')],
-#     'B':[('A','a'),('B','b')],
-#     'C':[('A','b'),('B','b')]
-# }
-states = ['q0','q1']
-alphabet = [0,1]
-startState = 'q0'
-acceptingStates = ['q1']
-transitions = {
-    'q0': {1: ['q1'], 0: ['q0','q1']},
-    'q1': {1: ['q1','q0']}
-}
-nfa = FA(states,alphabet,startState,acceptingStates,transitions)
-print(nfa.transitions)

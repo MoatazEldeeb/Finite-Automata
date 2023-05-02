@@ -37,10 +37,11 @@ class transitionInputWindow(QWidget):
                 if item is not None:
                     if ',' in item.text():
                         ts[colHeader][rowHeader] = (item.text().split(','))
+                    elif item.text() == '':
+                        ...
                     else:
                         ts[colHeader][rowHeader].append(item.text())
 
-        print(ts)
         return ts
         
     
