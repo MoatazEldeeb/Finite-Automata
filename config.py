@@ -1,7 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5 import QtWidgets,QtCore
-from directed import directedGraphWindow 
 from transitionsInput import transitionInputWindow
 
 class firstWindow(QWidget):
@@ -15,7 +14,7 @@ class firstWindow(QWidget):
         NFAstates = self.states.text().split(',')
         startState = self.startState.text()
         acceptingStates = self.acceptingStates.text().split(',')
-        self.transitionWindow = transitionInputWindow(alphabets,NFAstates,startState,acceptingStates)
+        self.transitionWindow = transitionInputWindow(alphabets,NFAstates,startState,acceptingStates,None)
         
         self.transitionWindow.show()
     

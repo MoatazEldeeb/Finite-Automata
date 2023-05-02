@@ -34,16 +34,18 @@ class FA():
         states = [self.states[0]]
         ts = {}
         ts[self.states[0]] = getTransitionsOf(self.states[0],self.transitions)
+        i= len(states)
+        while i>=0:
 
-        for s in states:
-            stateTransitions = ts[s]
-
-            for a, toStates in stateTransitions.items():
+            for a, toStates in ts[states[i- len(states)]].items():
                     temp = '-'.join(toStates)
                     newTransitions =  getTransitionsOf(temp,self.transitions)
                     if not(temp in states) and not (newTransitions in list(ts.values())):
                         states.append(temp)
                         ts[temp] = newTransitions
+                        i+=1
+            print(ts)
+            i-=1
 
         ts = self.renameStates(ts)
         acceptingStates = self.getAcceptingStates(self.acceptingStates,states)
