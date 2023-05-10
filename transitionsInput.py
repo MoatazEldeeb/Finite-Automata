@@ -47,9 +47,9 @@ class transitionInputWindow(QWidget):
     
     def inputToFA(self):
         self.nfa = FA(self.states,self.alphabets,self.startState,self.acceptingStates,self.get_input_fields_convert_to_nfa())
-        print(self.nfa.transitions)
+        print("NFA transitions:",self.nfa.transitions)
         self.dfa = self.nfa.convert2DFA()
-        print(self.dfa.transitions)
+        print("DFA transitions:",self.dfa.transitions)
 
         alphabets = self.dfa.alphabet
         states = self.dfa.states
@@ -58,9 +58,7 @@ class transitionInputWindow(QWidget):
         transitions = self.dfa.transitions
         self.close()
         self.dfaWindow = transitionInputWindow(alphabets,states,startState,acceptingStates,transitions)
-        # print('2')
-        # self.close()
-        # print('3')
+
         self.dfaWindow.show()
         
         
@@ -68,12 +66,12 @@ class transitionInputWindow(QWidget):
         
         for i in range(self.table.rowCount()):
             colHeader = self.states[i]
-            print(colHeader)
+            print("State:",colHeader)
             for j in range(self.table.columnCount()):
                 
                 rowHeader = self.alphabets[j]
-                print(rowHeader)
-                print(self.transitions[colHeader][rowHeader])
+                print("Alphabet:",rowHeader)
+                print("To:",self.transitions[colHeader][rowHeader])
                 item = QTableWidgetItem(str(self.transitions[colHeader][rowHeader]))
                 self.table.setItem(i, j,item)
         

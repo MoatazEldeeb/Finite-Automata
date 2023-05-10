@@ -40,12 +40,12 @@ class FA():
             for a, toStates in ts[states[i- len(states)]].items():
                     temp = '-'.join(toStates)
                     
-                    if not(temp in states) :
+                    if not(temp in states) and temp != '':
                         newTransitions =  getTransitionsOf(temp,self.transitions)
                         states.append(temp)
                         ts[temp] = newTransitions
                         i+=1
-            print(ts)
+ 
             i-=1
 
         ts = self.renameStates(ts)
