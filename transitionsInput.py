@@ -72,7 +72,11 @@ class transitionInputWindow(QWidget):
                 rowHeader = self.alphabets[j]
                 print("Alphabet:",rowHeader)
                 print("To:",self.transitions[colHeader][rowHeader])
-                item = QTableWidgetItem(str(self.transitions[colHeader][rowHeader]))
+                if len(self.transitions[colHeader][rowHeader])>0:
+
+                    item = QTableWidgetItem(str(self.transitions[colHeader][rowHeader]))
+                else:
+                    item = QTableWidgetItem(str(''))
                 self.table.setItem(i, j,item)
         
     def initUI(self):
