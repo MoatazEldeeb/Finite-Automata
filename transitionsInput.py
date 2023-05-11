@@ -6,7 +6,6 @@ from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtWidgets import QApplication, QTableWidget, QTableWidgetItem
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
-import networkx as nx
 from FiniteAutomata import FA
 
 class transitionInputWindow(QWidget):
@@ -18,7 +17,7 @@ class transitionInputWindow(QWidget):
         self.transitions = transitions
             
         super().__init__()
-        self.resize(1600, 800)
+        self.resize(1000, 800)
         self.initUI()
 
 
@@ -84,7 +83,7 @@ class transitionInputWindow(QWidget):
         n=len(self.alphabets)
         m=len(self.states)
         self.table = QTableWidget(m, n,parent=self)
-        self.table.setGeometry(50,50,1100,700)
+        self.table.setGeometry(50,50,550,700)
         statesLabels =[]
         for i in self.states:
             if i in self.acceptingStates:
@@ -105,21 +104,21 @@ class transitionInputWindow(QWidget):
             print(statesLabels)
 
             self.label = QtWidgets.QLabel(self)
-            self.label.setGeometry(1200, 100, 400, 50)
+            self.label.setGeometry(600, 100, 400, 50)
             self.label.setText("Enter the transition in the table")
             self.label = QtWidgets.QLabel(self)
-            self.label.setGeometry(1200, 150, 400, 50)
+            self.label.setGeometry(600, 150, 400, 50)
             self.label.setText("To enter multiple destination states (separate by ',')")
 
 
             self.convert = QtWidgets.QPushButton(self)
-            self.convert.setGeometry(1200, 700, 200, 50)
+            self.convert.setGeometry(600, 700, 200, 50)
             self.convert.setObjectName("convert")
             self.convert.setText("Convert to DFA")
             self.convert.clicked.connect(self.inputToFA)
             
             self.error = QtWidgets.QLabel(self)
             self.error.setStyleSheet("color: red;")
-            self.error.setGeometry(1200, 750, 400, 50)
+            self.error.setGeometry(600, 750, 400, 50)
         else:
             self.fillTable()

@@ -22,8 +22,8 @@ class firstWindow(QWidget):
     def initUI(self):
 
         self.label = QtWidgets.QLabel(self)
-        self.label.setGeometry(300, 50, 200, 40)
-        self.label.setText("Alphabets:(separated by ',')")
+        self.label.setGeometry(300, 50, 250, 40)
+        self.label.setText("Alphabets:(separated by ','), for \u03B5 add eps")
         
         self.alphabets = QtWidgets.QLineEdit(self)
         self.alphabets.setGeometry(300, 100, 200, 40)
