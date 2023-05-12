@@ -18,6 +18,7 @@ class CFG_Transitions(QWidget):
         self.production_rules = production_rules
             
         super().__init__()
+        self.setWindowTitle('Transitions')
         self.resize(1000, 800)
         self.initUI()
 
@@ -80,11 +81,15 @@ class CFG_Transitions(QWidget):
             self.label.setText("Enter the transition in the text box as a dict")
 
             self.label = QtWidgets.QLabel(self)
-            self.label.setGeometry(600, 150, 400, 200)
-            self.label.setText("{ 'S': ['aBc', 'ab'],'B': ['SB', '']}")
+            self.label.setGeometry(600, 150, 400, 50)
+            self.label.setText("For Example:")
 
             self.label = QtWidgets.QLabel(self)
             self.label.setGeometry(600, 200, 400, 50)
+            self.label.setText('{ "S": ["aBc", "ab"],"B": ["SB", ""]}')
+
+            self.label = QtWidgets.QLabel(self)
+            self.label.setGeometry(600, 250, 400, 50)
             self.label.setText("To enter multiple rules (separate by ',')")
 
             self.convert = QtWidgets.QPushButton(self)
@@ -100,7 +105,7 @@ class CFG_Transitions(QWidget):
             s = ""
             for key, values in self.production_rules.items():
                 for value in values:
-                    s+= (f"From {key[0]} with input '{key[1]}' and pop '{key[2]}': to {value[0]} and push '{value[1]}'") + '\n'
+                    s+=(f"δ({key[0]}, {key[1]}, {key[2]}) = ({value[0]}, {value[1]})\n") 
             self.transitionBox.setText(s)
 
     def is_json(self,myjson):

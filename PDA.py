@@ -9,12 +9,13 @@ class PDA:
 
     def create_transitions(self):
         transitions = {}
+        epsilon = 'ε'
 
         # Transition from q_start to q_push_start_var, pushing the stack symbol $
-        transitions[('q_start', '', '')] = [('q_push_start_var', '$')]
+        transitions[('q_start', epsilon, epsilon)] = [('q_push_start_var', '$')]
 
         # Transition from q_push_start_var to q_loop, pushing the start variable
-        transitions[('q_push_start_var', '', '')] = [('q_loop', self.start_variable)]
+        transitions[('q_start_var', epsilon, epsilon)] = [('q_loop', self.start_variable)]
 
         # Transitions for production rules, in q_loop state
         state_counter = 1
@@ -25,30 +26,30 @@ class PDA:
                 for idx, symbol in enumerate(prod_rule[::-1]):
                     new_state = f'q_alt_{state_counter}'
                     state_counter += 1
-                    transitions[(previous_state, '', variable)] = [(new_state, symbol)]
+                    transitions[(previous_state, epsilon, variable)] = [(new_state, symbol)]
                     previous_state = new_state
-                    variable = ''  # Clear the variable after the first iteration
+                    variable = epsilon  # Clear the variable after the first iteration
 
                 # Transition back to q_loop after pushing all symbols
-                transitions[(previous_state, '', '')] = [('q_loop', '')]
+                transitions[(previous_state, epsilon, epsilon)] = [('q_loop', epsilon)]
 
         # Transitions for terminal symbols, in q_loop state
         for terminal in self.terminals:
             # For each terminal symbol a, with input a and pop a, push ε
-            transitions[('q_loop', terminal, terminal)] = [('q_loop', '')]
+            transitions[('q_loop', terminal, terminal)] = [('q_loop', epsilon)]
 
         # Transition from q_loop to q_final, popping the stack symbol $
-        transitions[('q_loop', '', '$')] = [('q_final', '')]
+        transitions[('q_loop', epsilon, '$')] = [('q_final', epsilon)]
 
         return transitions
 
 def main():
-    variables = {'S','B'}
-    terminals = {'a', 'b','c'}
+    variables = {'S', 'B'}
+    terminals = {'a', 'b', 'c'}
     start_variable = 'S'
     production_rules = {
         'S': ['aBc', 'ab'],
-        'B': ['SB', '']
+        'B': ['SB', 'ε']
     }
 
     pda = PDA(variables, terminals, start_variable, production_rules)
@@ -60,7 +61,7 @@ def main():
     print(f"another format\n")
     for key, values in pda.transitions.items():
         for value in values:
-            print(f"{key[0]}, '{key[1]}', '{key[2]}': --> {value[0]}, '{value[1]}'")
+            print(f"δ({key[0]}, {key[1]}, {key[2]}) = ({value[0]}, {value[1]})")
 
 if __name__ == '__main__':
     main()

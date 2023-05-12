@@ -17,6 +17,7 @@ class transitionInputWindow(QWidget):
         self.transitions = transitions
             
         super().__init__()
+        self.setWindowTitle('Transitions')
         self.resize(1000, 800)
         self.initUI()
 
