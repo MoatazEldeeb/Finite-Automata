@@ -1,6 +1,6 @@
 class PDA:
     def __init__(self, variables, terminals, start_variable, production_rules):
-        self.states = ['q_start', 'q_push_start_var', 'q_loop', 'q_final']
+        self.states = ['q_start', 'q_start_var', 'q_loop', 'q_final']
         self.variables = variables
         self.terminals = terminals
         self.start_variable = start_variable
@@ -11,10 +11,10 @@ class PDA:
         transitions = {}
         epsilon = 'ε'
 
-        # Transition from q_start to q_push_start_var, pushing the stack symbol $
-        transitions[('q_start', epsilon, epsilon)] = [('q_push_start_var', '$')]
+        # Transition from q_start to q_start_var, pushing the stack symbol $
+        transitions[('q_start', epsilon, epsilon)] = [('q_start_var', '$')]
 
-        # Transition from q_push_start_var to q_loop, pushing the start variable
+        # Transition from q_start_var to q_loop, pushing the start variable
         transitions[('q_start_var', epsilon, epsilon)] = [('q_loop', self.start_variable)]
 
         # Transitions for production rules, in q_loop state
